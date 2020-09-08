@@ -7,6 +7,22 @@
 #include <netinet/in.h>
 #include <string.h>
 #define PORT 1234
+
+int clean_buffer(char buffer[]){
+	int i = 0;
+
+	while(buffer[i] != 0){
+		buffer[i] = 0;
+		i++;
+	}
+
+
+	printf("-----------------------------\n");
+
+	return 0;
+}
+
+
 int main(int argc, char const *argv[])
 {
     int server_fd, new_socket, valread;
@@ -53,9 +69,9 @@ int main(int argc, char const *argv[])
 		exit(EXIT_FAILURE);
 	}
 	while(buffer[0]!='X'){
-
+		clean_buffer(buffer);
 	    valread = read( new_socket , buffer, 1024);
-	    printf("%s\n",buffer);
+	    printf("El buffer es : %s \n",buffer);
 	    //send(new_socket , hello , strlen(hello) , 0 );
 		if (buffer[0]=='a')
 			printf("Es a\n");
