@@ -18,15 +18,15 @@ void move_servo(int seconds){
 	softPwmCreate(P_PIN,0,200);
 
 	printf ("Bajo\n");
-	softPwmWrite(P_PIN, 1);
+	softPwmWrite(P_PIN, 10);
 	delay(1000);
 
 	printf ("Termino la bajada, espero\n");
 	softPwmWrite(P_PIN, 0);
 	delay(seconds*1000);
 	printf ("Termino la espera, subo\n");
-	softPwmWrite(P_PIN, 20);
-	delay(1000);
+	softPwmWrite(P_PIN, 16);
+	delay(100);
 	return;
 
 }
