@@ -49,7 +49,6 @@ int check_fire(char buffer[]){
   	if ((buffer[0]=='f')&&(buffer[1]=='i')&&(buffer[2]=='r')&&(buffer[3]=='e')){
 		token = strtok(NULL," ");
 		if (token !=NULL){
-			printf("El token es %s \n", token);
 			fire = atoi(token);
 		}
 	}
@@ -99,21 +98,15 @@ int main(int argc, char const *argv[])
 	while(buffer[0] != 'X'){
 		clean_buffer(buffer);
 	    valread = read( new_socket , buffer, 1024);
-	    printf("El buffer es : %s \n",buffer);
 		if (seconds = check_fire(buffer)){
 			printf("FIRE IN THE HOLEEEE FOR %d MILISECONDS\n",seconds);
 			move_servo(seconds);
 
 		}
 
-		if (buffer[0] == 'a')
-			printf("Es a\n");
 		if (buffer[0] == 0){
-			printf("Es 0\n");
 			return 0;
 		}
 	}
-
-    printf("Hello message sent\n");
     return 0;
 }
