@@ -1,3 +1,5 @@
+#include <wiringPi.h>
+#include <softPwm.h>
 #include <unistd.h>
 #include <stdio.h>
 #include <sys/socket.h>
@@ -5,6 +7,29 @@
 #include <netinet/in.h>
 #include <string.h>
 #define PORT 1234
+#define P_PIN 1
+
+void move_servo(int seconds){
+	printf ("Raspberry Pi wiringPi test program\n");
+	wiringPiSetup();
+	pinMode (P_PIN, PWM_OUTPUT);
+
+	digitalWrite(P_PIN, 0);
+	softPwmCreate(P_PIN,0,200);
+
+	printf ("Bajo\n");
+	softPwmWrite(P_PIN, 1);
+	delay(1000);
+
+	printf ("Termino la bajada, espero\n");
+	softPwmWrite(P_PIN, 0);
+	delay(seconds*1000);
+	printf ("Termino la espera, subo\n");
+	softPwmWrite(P_PIN, 20);
+	delay(1000);
+	return;
+
+}
 
 void clean_buffer(char buffer[]){
 	int i = 0;
@@ -77,6 +102,8 @@ int main(int argc, char const *argv[])
 	    printf("El buffer es : %s \n",buffer);
 		if (seconds = check_fire(buffer)){
 			printf("FIRE IN THE HOLEEEE FOR %d MILISECONDS\n",seconds);
+			move_servo(seconds);
+
 		}
 
 		if (buffer[0] == 'a')
